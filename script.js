@@ -105,17 +105,36 @@ const VoiceRSS = {
   },
 };
 
-function test() {
-  VoiceRSS.speech({
-    key: '40292ee9f1994e62ad9594b0c1ec7576',
-    src: 'Hello, world!',
-    hl: 'en-us',
-    v: 'Linda',
-    r: 0,
-    c: 'mp3',
-    f: '44khz_16bit_stereo',
-    ssml: false,
-  });
+// function test() {
+//   VoiceRSS.speech({
+//     key: '40292ee9f1994e62ad9594b0c1ec7576',
+//     src: 'Hello, world!',
+//     hl: 'en-us',
+//     v: 'Linda',
+//     r: 0,
+//     c: 'mp3',
+//     f: '44khz_16bit_stereo',
+//     ssml: false,
+//   });
+// }
+
+// test();
+
+async function getJokes() {
+  let joke = '';
+  const apiUrl = 'https://v2.jokeapi.dev/joke/Programming';
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.setup) {
+      joke = `${data.setup}... ${data.delivery}`;
+    } else {
+      joke = data.joke;
+    }
+    console.log(joke);
+  } catch (error) {
+    console.log('Joke API Error: ', error);
+  }
 }
 
-test();
+getJokes();
