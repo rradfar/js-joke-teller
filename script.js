@@ -105,6 +105,10 @@ const VoiceRSS = {
   },
 };
 
+function toggleButton() {
+  button.disabled = !button.disabled;
+}
+
 function sendToSpeech(joke) {
   VoiceRSS.speech({
     key: '40292ee9f1994e62ad9594b0c1ec7576',
@@ -130,9 +134,11 @@ async function getJokes() {
       joke = data.joke;
     }
     sendToSpeech(joke);
+    toggleButton();
   } catch (error) {
     console.log('Joke API Error: ', error);
   }
 }
 
 button.addEventListener('click', getJokes);
+audioElement.addEventListener('ended', toggleButton);
