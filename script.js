@@ -105,20 +105,18 @@ const VoiceRSS = {
   },
 };
 
-// function test() {
-//   VoiceRSS.speech({
-//     key: '40292ee9f1994e62ad9594b0c1ec7576',
-//     src: 'Hello, world!',
-//     hl: 'en-us',
-//     v: 'Linda',
-//     r: 0,
-//     c: 'mp3',
-//     f: '44khz_16bit_stereo',
-//     ssml: false,
-//   });
-// }
-
-// test();
+function sendToSpeech(joke) {
+  VoiceRSS.speech({
+    key: '40292ee9f1994e62ad9594b0c1ec7576',
+    src: joke,
+    hl: 'en-us',
+    v: 'Linda',
+    r: 0,
+    c: 'mp3',
+    f: '44khz_16bit_stereo',
+    ssml: false,
+  });
+}
 
 async function getJokes() {
   let joke = '';
@@ -131,10 +129,10 @@ async function getJokes() {
     } else {
       joke = data.joke;
     }
-    console.log(joke);
+    sendToSpeech(joke);
   } catch (error) {
     console.log('Joke API Error: ', error);
   }
 }
 
-getJokes();
+button.addEventListener('click', getJokes);
